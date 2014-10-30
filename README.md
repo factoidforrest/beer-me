@@ -1,4 +1,4 @@
-sudoku
+Beer Me
 ======
 
 ### About
