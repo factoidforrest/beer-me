@@ -8,4 +8,7 @@ body {
 	background-color: #E7E7E5 !important;
 }
 
-//override default border and margins
+#map_canvas {
+	width: 500px;
+	height: 500px;
+}
