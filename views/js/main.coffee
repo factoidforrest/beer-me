@@ -22,7 +22,6 @@ requirejs.config
 require [
   "jquery"
   "bootstrap"
-  "goog!maps,3"#,other_params:sensor=false"
-  "Map"
-], ($, bs, api, Map) ->
-  map = new Map
+  "map"
+], ($, bs, Map) ->
+  map = new Map()

@@ -12,4 +12,7 @@ requirejs.config({
   }
 });
 
-require(["jquery", "bootstrap", "goog!maps,3"], function($) {});
+require(["jquery", "bootstrap", "map"], function($, bs, Map) {
+  var map;
+  return map = new Map();
+});
