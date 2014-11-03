@@ -14,13 +14,11 @@ define(["goog!maps,3"], function() {
       map = new google.maps.Map(mapCanvas, mapOptions);
       this.map = map;
       handleNoGeolocation = function(errorFlag) {
-        var montreal;
         if (errorFlag === true) {
           console.log("Geolocation service encountered error");
         } else {
           console.log("Your browser doesn't support geolocation");
         }
-        montreal = new google.maps.LatLng(45.5000, 73.5667);
       };
       if (navigator.geolocation) {
         browserSupportFlag = true;
