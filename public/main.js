@@ -13,6 +13,6 @@ requirejs.config({
 });
 
 require(["jquery", "bootstrap", "map"], function($, bs, Map) {
-  var map;
-  return map = new Map();
+  var mapControl;
+  return mapControl = new Map();
 });

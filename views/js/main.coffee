@@ -24,4 +24,4 @@ require [
   "bootstrap"
   "map"
 ], ($, bs, Map) ->
-  map = new Map()
+  mapControl = new Map()
