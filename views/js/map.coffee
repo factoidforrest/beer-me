@@ -26,6 +26,7 @@ define ["goog!maps,3"] , ->
 				navigator.geolocation.getCurrentPosition ((position) ->
 					initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude)
 					self.map.setCenter initialLocation
+					self.map.setZoom(15)
 					self.showUserLocationMarker(position)
 					return
 				), ->
@@ -47,7 +48,7 @@ define ["goog!maps,3"] , ->
 					map: @map
 				)
 
-			#placeMarker(marker, pos)
+			placeMarker(marker, pos)
 			
 			#update when position changes
 

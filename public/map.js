@@ -26,6 +26,7 @@ define(["goog!maps,3"], function() {
           var initialLocation;
           initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
           self.map.setCenter(initialLocation);
+          self.map.setZoom(15);
           self.showUserLocationMarker(position);
         }), function() {
           handleNoGeolocation(browserSupportFlag);
@@ -45,6 +46,7 @@ define(["goog!maps,3"], function() {
         zIndex: 999,
         map: this.map
       });
+      placeMarker(marker, pos);
       return navigator.geolocation.watchPosition(function(newPosition) {
         return placeMarker(marker, newPosition);
       });

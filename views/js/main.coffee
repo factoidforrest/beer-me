@@ -24,4 +24,4 @@ require [
   "bootstrap"
   "map"
 ], ($, bs, Map) ->
-  mapAPI = new Map()
+  window.mapAPI = new Map()
