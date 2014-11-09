@@ -1,4 +1,5 @@
-define ["goog!maps,3"] , ->
+#define ["goog!maps,3"] , ->
+define ['async!http://maps.google.com/maps/api/js?key=AIzaSyDlRf_zcIM-9i1D1cbioaBLQrsRbxsM4lE&libraries=places'] , ->
 
 	class Map
 
@@ -13,7 +14,7 @@ define ["goog!maps,3"] , ->
 
 			@map = map = new google.maps.Map(mapCanvas, mapOptions)
 			
-			# Browser doesn't support Geolocation
+
 
 
 			#set center of map to user location

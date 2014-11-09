@@ -3,9 +3,7 @@ requirejs.config({
   paths: {
     jquery: ["components/jquery/dist/jquery.min"],
     bootstrap: ["components/bootstrap/dist/js/bootstrap.min"],
-    async: ["components/requirejs-plugins/src/async"],
-    propertyParser: ["components/requirejs-plugins/src/propertyParser"],
-    goog: ["components/requirejs-plugins/src/goog"]
+    async: ["components/requirejs-plugins/src/async"]
   },
   shim: {
     bootstrap: ["jquery"]

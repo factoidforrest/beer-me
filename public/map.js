@@ -1,6 +1,6 @@
 var handleNoGeolocation, placeMarker;
 
-define(["goog!maps,3"], function() {
+define(['async!http://maps.google.com/maps/api/js?key=AIzaSyDlRf_zcIM-9i1D1cbioaBLQrsRbxsM4lE&libraries=places'], function() {
   var Map;
   Map = (function() {
     function Map() {
