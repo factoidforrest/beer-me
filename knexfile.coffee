@@ -11,15 +11,12 @@ module.exports =
     migrations:
       tableName: 'knex_migrations'
 
-  staging:
+  test:
     client: 'postgresql'
     connection:
-      database: 'my_db'
-      user:     'username'
-      password: 'password'
-    pool:
-      min: 2
-      max: 10
+      database: 'beermetest'
+      user:     'root'
+      password: ''
     migrations:
       tableName: 'knex_migrations'
 

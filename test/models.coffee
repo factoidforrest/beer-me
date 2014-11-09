@@ -1,4 +1,7 @@
+process.env.NODE_ENV = 'test'
+
 should = require('chai').should()
+assert = require('chai').assert
 app = require('./../server')
 db = app.get('db')
 
@@ -23,5 +26,8 @@ describe 'location', ->
 
 		it 'should destroy', ->
 			Location.where({title:'bla'}).fetchAll().then (locations) ->
-				locations.reset()
-				locations.size().should.equal(0)
+				assert(locations.size() == 1, "exactly one location exists")
+				locations.invokeThen('destroy').then -> 
+
+					locations.fetch().then (updatedLocations) ->
+						updatedLocations.size().should.equal(0)

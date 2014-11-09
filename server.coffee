@@ -9,7 +9,7 @@ favicon = require('serve-favicon')
 DB = require('./server/database')
 replify = require('replify')
 
-production = process.env.PRODUCTION == 'true'
+production = app.get('env') == 'production'
 
 app.use(express.compress())
 app.set('views', __dirname + '/views')
@@ -49,6 +49,7 @@ app.get('/:section?', handlers.root)
 db = new DB()
 app.set('db', db)
 
+console.log("Node Env: ", app.get('env'))
 
 app.listen(process.env.PORT || 3000)
 #replify('realtime-101', app)
