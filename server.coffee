@@ -45,14 +45,13 @@ app.use(express.static(__dirname + '/public', { maxAge: cachetime }))
 #static file routes
 app.get('/:section?', handlers.root)
 
-#database
-console.log('initializing database ', DB)
+
 db = new DB()
 app.set('db', db)
 
 
 app.listen(process.env.PORT || 3000)
-replify('realtime-101', app)
+#replify('realtime-101', app)
 
 module.exports = app
 
