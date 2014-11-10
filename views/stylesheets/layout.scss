@@ -1,5 +1,5 @@
-@import "components/leaflet/dist/leaflet.css";
-@import "components/leaflet.locatecontrol/src/L.Control.Locate.css";
+@import "../../public/components/leaflet/dist/leaflet";
+@import "../../public/components/leaflet.locatecontrol/dist/L.Control.Locate.min";
 html, body {
  height: 100%;
 }
