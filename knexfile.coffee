@@ -3,6 +3,9 @@
 module.exports =
 
   development:
+    seeds: {
+      directory: './server/database/seeds/'
+    }
     client: 'postgresql'
     connection:
       database: 'beerme'

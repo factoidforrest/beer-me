@@ -6,7 +6,7 @@ handlers = require('./server/handlers')
 sass = require('node-sass')
 path = require('path')
 favicon = require('serve-favicon')
-DB = require('./server/database')
+DB = require('./server/database/database')
 replify = require('replify')
 
 production = app.get('env') == 'production'
