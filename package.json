@@ -28,7 +28,7 @@
     "coffee-script": "~1.7.1"
   },
   "scripts": {
-    //"postinstall": "./node_modules/bower/bin/bower install"
+    "postinstall": "./node_modules/bower/bin/bower install"
   },
   "repository": {
     "type": "git",
