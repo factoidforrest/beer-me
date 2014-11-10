@@ -3,10 +3,15 @@ requirejs.config({
   paths: {
     jquery: ["components/jquery/dist/jquery.min"],
     bootstrap: ["components/bootstrap/dist/js/bootstrap.min"],
-    async: ["components/requirejs-plugins/src/async"]
+    async: ["components/requirejs-plugins/src/async"],
+    leaflet: ["components/leaflet/dist/leaflet"],
+    leaflet_locate: ["components/leaflet.locatecontrol/dist/L.Control.Locate.min"],
+    leaflet_geoip: ["libs/leaflet-geoip"]
   },
   shim: {
-    bootstrap: ["jquery"]
+    bootstrap: ["jquery"],
+    leaflet_locate: ['leaflet'],
+    leaflet_geoip: ['leaflet']
   }
 });
 

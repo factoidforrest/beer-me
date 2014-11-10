@@ -13,12 +13,15 @@ requirejs.config
     async: ["components/requirejs-plugins/src/async"]
     #propertyParser: ["components/requirejs-plugins/src/propertyParser"]
     #goog: ["components/requirejs-plugins/src/goog"]
+    leaflet: ["components/leaflet/dist/leaflet"]
+    leaflet_locate: ["components/leaflet.locatecontrol/dist/L.Control.Locate.min"]
+    leaflet_geoip: ["libs/leaflet-geoip"]
   shim:
     
     # Set bootstrap dependencies (just jQuery) 
     bootstrap: ["jquery"]
-    #goog: ["propertyparser", "async"]
-
+    leaflet_locate: ['leaflet']
+    leaflet_geoip: ['leaflet']
 require [
   "jquery"
   "bootstrap"

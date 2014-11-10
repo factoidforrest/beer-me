@@ -26,7 +26,7 @@ app.use(sass.middleware({
   outputStyle: if production then 'compressed' else 'nested'
 }))
 
-#TODO: switch to a compiler with compression support
+#TODO: switch to a compiler with compression support or maybe not and just have require minifier do it later
 app.use(coffeescript({
   src: __dirname + '/views/js',
   dest: __dirname + '/public',

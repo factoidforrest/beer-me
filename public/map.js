@@ -1,73 +1,54 @@
-var handleNoGeolocation, placeMarker;
-
-define(['async!http://maps.google.com/maps/api/js?key=AIzaSyDlRf_zcIM-9i1D1cbioaBLQrsRbxsM4lE&libraries=places'], function() {
-  var Map;
+define(['leaflet', 'leaflet_locate', 'leaflet_geoip'], function() {
+  var Map, locateOptions;
   Map = (function() {
     function Map() {
-      var map, mapCanvas, mapOptions, self;
+      var lc, map, self;
       self = this;
       console.log("map initializing");
-      mapCanvas = document.getElementById('map_canvas');
-      mapOptions = {
-        center: new google.maps.LatLng(45.5000, -73.5667),
-        zoom: 8,
-        mapTypeId: google.maps.MapTypeId.ROADMAP
-      };
-      this.map = map = new google.maps.Map(mapCanvas, mapOptions);
-      this.autoLocate();
+      this.map = map = L.map('map').setView([51.505, -0.09], 11);
+      L.GeoIP.centerMapOnPosition(map);
+      lc = L.control.locate(locateOptions).addTo(map);
+      lc.locate();
+      L.tileLayer('http://{s}.tiles.mapbox.com/v3/light24bulbs.k6c8a0kc/{z}/{x}/{y}.png', {
+        attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
+        maxZoom: 18
+      }).addTo(map);
     }
-
-    Map.prototype.autoLocate = function() {
-      var browserSupportFlag, self;
-      self = this;
-      if (navigator.geolocation) {
-        browserSupportFlag = true;
-        return navigator.geolocation.getCurrentPosition((function(position) {
-          var initialLocation;
-          initialLocation = new google.maps.LatLng(position.coords.latitude, position.coords.longitude);
-          self.map.setCenter(initialLocation);
-          self.map.setZoom(15);
-          self.showUserLocationMarker(position);
-        }), function() {
-          handleNoGeolocation(browserSupportFlag);
-        });
-      } else {
-        browserSupportFlag = false;
-        return handleNoGeolocation(browserSupportFlag);
-      }
-    };
-
-    Map.prototype.showUserLocationMarker = function(pos) {
-      var marker;
-      marker = this.userLocationMarker = new google.maps.Marker({
-        clickable: false,
-        icon: new google.maps.MarkerImage("//maps.gstatic.com/mapfiles/mobile/mobileimgs2.png", new google.maps.Size(22, 22), new google.maps.Point(0, 18), new google.maps.Point(11, 11)),
-        shadow: null,
-        zIndex: 999,
-        map: this.map
-      });
-      placeMarker(marker, pos);
-      return navigator.geolocation.watchPosition(function(newPosition) {
-        return placeMarker(marker, newPosition);
-      });
-    };
 
     return Map;
 
   })();
+  locateOptions = {
+    position: "topleft",
+    drawCircle: true,
+    follow: true,
+    setView: true,
+    keepCurrentZoomLevel: true,
+    maxZoom: 12,
+    stopFollowingOnDrag: true,
+    remainActive: true,
+    markerClass: L.circleMarker,
+    circleStyle: {},
+    markerStyle: {},
+    followCircleStyle: {},
+    followMarkerStyle: {},
+    icon: "fa fa-map-marker",
+    iconLoading: "fa fa-spinner fa-spin",
+    circlePadding: [0, 0],
+    metric: true,
+    onLocationError: function(err) {
+      alert(err.message);
+    },
+    onLocationOutsideMapBounds: function(context) {
+      alert(context.options.strings.outsideMapBoundsMsg);
+    },
+    showPopup: true,
+    strings: {
+      title: "Show me where I am",
+      popup: "You are within {distance} {unit} from this point",
+      outsideMapBoundsMsg: "You seem located outside the boundaries of the map"
+    },
+    locateOptions: {}
+  };
   return Map;
 });
-
-handleNoGeolocation = function(errorFlag) {
-  if (errorFlag === true) {
-    console.log("Geolocation service encountered error");
-  } else {
-    console.log("Your browser doesn't support geolocation");
-  }
-};
-
-placeMarker = function(marker, pos) {
-  var latLng;
-  latLng = new google.maps.LatLng(pos.coords.latitude, pos.coords.longitude);
-  return marker.setPosition(latLng);
-};
