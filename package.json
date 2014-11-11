@@ -25,14 +25,14 @@
     "pg": "~3.6.2",
     "replify": "~1.2.0",
     "mocha": "~2.0.1",
-    "chai": "~1.9.2"
+    "chai": "~1.9.2",
+    "body-parser": "~1.9.2",
+    "postgeo": "~0.1.2"
   },
   "devDependencies": {
     "coffee-script": "~1.7.1"
   },
-  "scripts": {
-    
-  },
+  "scripts": {},
   "repository": {
     "type": "git",
     "url": "git://git@github.com:light24bulbs/beer-me.git"

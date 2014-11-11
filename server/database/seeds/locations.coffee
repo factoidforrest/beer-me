@@ -14,5 +14,7 @@ exports.seed = (knex, Promise) ->
   		description: 'An example point used for testing purposes'
   		lat:40.7127
   		lng:74.0059
+  		created_at: knex.raw('now()')
+  		updated_at: knex.raw('now()')
   	}
   )

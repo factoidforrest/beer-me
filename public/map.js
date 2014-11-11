@@ -1,7 +1,10 @@
+var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
+
 define(['leaflet', 'leaflet_locate', 'leaflet_geoip'], function() {
   var Map, locateOptions;
   Map = (function() {
     function Map() {
+      this.populate = __bind(this.populate, this);
       var lc, map, self;
       self = this;
       console.log("map initializing");
@@ -13,7 +16,12 @@ define(['leaflet', 'leaflet_locate', 'leaflet_geoip'], function() {
         attribution: 'Map data &copy; <a href="http://openstreetmap.org">OpenStreetMap</a> contributors, <a href="http://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, Imagery © <a href="http://mapbox.com">Mapbox</a>',
         maxZoom: 18
       }).addTo(map);
+      map.on('moveend', this.populate);
     }
+
+    Map.prototype.populate = function(e) {
+      return console.log(this.map.getBounds());
+    };
 
     return Map;
 

@@ -15,11 +15,15 @@ define ['leaflet', 'leaflet_locate', 'leaflet_geoip'] , ->
 				maxZoom: 18
 			}).addTo(map);
 
+			map.on('moveend', @populate)
 		#CLASS ENDS
 
+		populate: (e)=>
+			console.log(@map.getBounds())
 
 
-	locateOptions =
+
+	locateOptions = {
 	  position: "topleft" # set the location of the control
 	  drawCircle: true # controls whether a circle is drawn that shows the uncertainty about the location
 	  follow: true # follow the user's location
@@ -55,6 +59,6 @@ define ['leaflet', 'leaflet_locate', 'leaflet_geoip'] , ->
 	    outsideMapBoundsMsg: "You seem located outside the boundaries of the map" # default message for onLocationOutsideMapBounds
 
 	  locateOptions: {} # define location options e.g enableHighAccuracy: true or maxZoom: 10
-
+	 }
 
 	return Map

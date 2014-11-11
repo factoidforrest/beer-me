@@ -8,10 +8,12 @@ path = require('path')
 favicon = require('serve-favicon')
 DB = require('./server/database/database')
 replify = require('replify')
+parser = require 'body-parser'
 
 production = app.get('env') == 'production'
 
 app.use(express.compress())
+app.use(parser.urlencoded({ extended: true }))
 app.set('views', __dirname + '/views')
 app.use(express.logger())
 app.use(favicon(path.join(__dirname,'public','images','favicon.ico')))
@@ -42,8 +44,11 @@ else
 #static assets
 app.use(express.static(__dirname + '/public', { maxAge: cachetime }))
 
-#static file routes
-app.get('/:section?', handlers.root)
+#root
+app.get('/', handlers.root)
+
+#api
+app.post('/locations', handlers.locations)
 
 
 db = new DB()
