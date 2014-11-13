@@ -4,16 +4,17 @@ locationModel = require('./models/location')
 
 env = process.env.NODE_ENV || "development"
 
-#JS metaprogramming sucks
+###
 adapter = {
 	"development": adapters.development
 	"test": adapters.test
 	"production": adapters.production
 }
+###
 
 class Database
 	constructor: () ->
-		@knex = require('knex')(adapter[env])
+		@knex = require('knex')(adapters[env])
 		@bookshelf = require('bookshelf')(@knex)
 		#console.log(@bookshelf)
 		@models = {
@@ -25,6 +26,7 @@ class Database
 
 
 
+#connect the db the first time it is required by server.coffee
+db = new Database()
 
-
-module.exports = Database
+module.exports = db

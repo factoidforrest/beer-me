@@ -24,6 +24,14 @@ describe 'location', ->
 			Location.where({title:'bla'}).fetch().then (loc) ->
 				loc.should.have.property('attributes')
 
+		it 'should convert to json', ->
+			Location.where({title:'bla'}).fetch().then (loc) ->
+				console.log JSON.stringify(loc)
+				
+		it 'should convert from collection to json', ->
+			Location.where({title:'bla'}).fetch().then (locs) ->
+				console.log JSON.stringify(locs)
+
 		it 'should destroy', ->
 			Location.where({title:'bla'}).fetchAll().then (locations) ->
 				assert(locations.size() == 1, "exactly one location exists")

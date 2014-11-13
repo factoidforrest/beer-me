@@ -1,6 +1,6 @@
 var __bind = function(fn, me){ return function(){ return fn.apply(me, arguments); }; };
 
-define(['leaflet', 'leaflet_locate', 'leaflet_geoip'], function() {
+define(['layer', 'leaflet', 'leaflet_locate', 'leaflet_geoip'], function(Layer) {
   var Map, locateOptions;
   Map = (function() {
     function Map() {
@@ -8,8 +8,7 @@ define(['leaflet', 'leaflet_locate', 'leaflet_geoip'], function() {
       var lc, map, self;
       self = this;
       console.log("map initializing");
-      this.map = map = L.map('map').setView([51.505, -0.09], 11);
-      L.GeoIP.centerMapOnPosition(map);
+      window.map = this.map = map = L.map('map').setView([51.505, -0.09], 11);
       lc = L.control.locate(locateOptions).addTo(map);
       lc.locate();
       L.tileLayer('http://{s}.tiles.mapbox.com/v3/light24bulbs.k6c8a0kc/{z}/{x}/{y}.png', {
@@ -20,7 +19,25 @@ define(['leaflet', 'leaflet_locate', 'leaflet_geoip'], function() {
     }
 
     Map.prototype.populate = function(e) {
-      return console.log(this.map.getBounds());
+      var loc, stores;
+      loc = this.map.getBounds();
+      this.storesLayer = L.layerGroup();
+      stores = new Layer({
+        layerGroup: this.storesLayer
+      });
+      stores.get('locations').fetch({
+        data: {
+          box: {
+            leftLat: loc._southWest.lat,
+            rightLat: loc._northEast.lat,
+            topLng: loc._northEast.lng,
+            bottomLng: loc._southWest.lng
+          }
+        },
+        type: 'POST',
+        processData: true
+      });
+      return this.storesLayer.addTo(this.map);
     };
 
     return Map;

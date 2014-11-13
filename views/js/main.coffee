@@ -16,6 +16,9 @@ requirejs.config
     leaflet: ["components/leaflet/dist/leaflet"]
     leaflet_locate: ["components/leaflet.locatecontrol/dist/L.Control.Locate.min"]
     leaflet_geoip: ["libs/leaflet-geoip"]
+    underscore: ['components/underscore/underscore']
+    backbone: ["components/backbone/backbone"]
+    layer: ["models/layer"]
   shim:
     
     # Set bootstrap dependencies (just jQuery) 

@@ -32,7 +32,9 @@
   "devDependencies": {
     "coffee-script": "~1.7.1"
   },
-  "scripts": {},
+  "scripts": {
+    "postinstall": "knex migrate:latest"
+    },
   "repository": {
     "type": "git",
     "url": "git://git@github.com:light24bulbs/beer-me.git"

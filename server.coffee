@@ -6,7 +6,7 @@ handlers = require('./server/handlers')
 sass = require('node-sass')
 path = require('path')
 favicon = require('serve-favicon')
-DB = require('./server/database/database')
+db = require('./server/database/database')
 replify = require('replify')
 parser = require 'body-parser'
 
@@ -51,7 +51,7 @@ app.get('/', handlers.root)
 app.post('/locations', handlers.locations)
 
 
-db = new DB()
+
 app.set('db', db)
 
 console.log("Node Env: ", app.get('env'))
