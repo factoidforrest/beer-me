@@ -48,17 +48,19 @@ module.exports = (bookshelf) ->
 
 	}, {
 		#class methods
-		console.log('firing query: ')
-		console.log(knex('locations').whereBetween('lat',[box.leftLat, box.rightLat]).toSQL())
-		this
-		.query('whereBetween','lat', [box.leftLat, box.rightLat])
-		.query('whereBetween','lng', [box.topLng, box.bottomLng])
-		.fetchAll().then (locations) ->
-			console.log("the fetched locations within map bounds is ", locations)
-			console.log('the number of locs is ', locations.length)
-			console.log("the first one as json is ",  locations[0])
-			console.log("converted to json", locations.toJSON())
+		findInBox: (box) ->
 
-			res.json(locations.toJSON())
+			console.log('firing query: ')
+			console.log(knex('locations').whereBetween('lat',[box.leftLat, box.rightLat]).toSQL())
+			this
+			.query('whereBetween','lat', [box.leftLat, box.rightLat])
+			.query('whereBetween','lng', [box.topLng, box.bottomLng])
+			.fetchAll().then (locations) ->
+				console.log("the fetched locations within map bounds is ", locations)
+				console.log('the number of locs is ', locations.length)
+				console.log("the first one as json is ",  locations[0])
+				console.log("converted to json", locations.toJSON())
+
+				res.json(locations.toJSON())
 	})
 	return Location
