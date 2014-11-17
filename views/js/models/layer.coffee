@@ -31,6 +31,7 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 
 	})
 
+	
 	Layer = Backbone.Model.extend({
 		initialize: ()->
 			locations = new LocationCollection

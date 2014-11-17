@@ -1,13 +1,13 @@
 #define ["goog!maps,3"] , ->
-define ['layer', 'leaflet', 'leaflet_locate', 'leaflet_geoip'] , (Layer) ->
+define ['layer', 'api', 'leaflet', 'leaflet_locate', 'leaflet_geoip'] , (Layer, API) ->
 
 	class Map
 
 		constructor: ()->
 			self = this
 			console.log("map initializing")
+
 			window.map = @map = map = L.map('map').setView([51.505, -0.09], 11)
-			#fuck geoip, consider using this in the event locating failed 
 			#L.GeoIP.centerMapOnPosition(map)
 			lc = L.control.locate(locateOptions).addTo(map)
 			lc.locate()
@@ -16,35 +16,30 @@ define ['layer', 'leaflet', 'leaflet_locate', 'leaflet_geoip'] , (Layer) ->
 				maxZoom: 18
 			}).addTo(map);
 
+			#make a function which does this and pass in a few layers
+			@storesLayer = L.layerGroup()
+			@stores = new Layer {layerGroup: @storesLayer}
+			@storesLayer.addTo(@map)
+
+			#listeners
 			map.on('moveend', @populate)
-		#CLASS ENDS
+		
 
 		#move the core logic here to another class called API
 		populate: (e) =>
-			loc = @map.getBounds()
+			bounds = @map.getBounds()
+			API.getLocations(@stores, bounds)
 
-			@storesLayer = L.layerGroup()
-			stores = new Layer {layerGroup: @storesLayer}
+
+
+	#CLASS ENDS
 			
-			stores.get('locations').fetch({ 
-				data: {
-					box : { 			
-						leftLat: loc._southWest.lat
-						rightLat: loc._northEast.lat
-						topLng: loc._northEast.lng
-						bottomLng: loc._southWest.lng
-					}
-				},
-				type: 'POST',
-				processData: true
-			})
-
-			@storesLayer.addTo(@map)
 
 
 
 
 
+	#locate plugin has some serious options, get passed in above
 
 	locateOptions = {
 		position: "topleft" # set the location of the control
