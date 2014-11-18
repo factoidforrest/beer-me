@@ -1,25 +1,5 @@
-###
-app = require('./../../server')
-
-
-Location = app.get('db').bookshelf.Model.extend({
-	tableName: 'locations'
-
-	initalize: () ->
-		return
-
-	ratings: () ->
-		#return this.hasMany(Ratings)
-	
-
-	})
-
-module.exports = Location
-
-
-###
-
-#Location
+db = require('./../database')
+knex = db.knex
 
 module.exports = (bookshelf) ->
 	Location = bookshelf.Model.extend({
@@ -28,6 +8,8 @@ module.exports = (bookshelf) ->
 		tableName: 'locations'
 
 		initialize: () ->
+			this.set('created_at', Date.now())
+			this.set('updated_at', Date.now())
 			console.log('initializing location model with attributes')
 			console.log(this)
 			return
@@ -49,18 +31,16 @@ module.exports = (bookshelf) ->
 	}, {
 		#class methods
 		findInBox: (box) ->
-
+			db = require('./../database')
+			knex = db.knex
 			console.log('firing query: ')
-			console.log(knex('locations').whereBetween('lat',[box.leftLat, box.rightLat]).toSQL())
-			this
+
+			#console.log(knex('locations').whereBetween('lat',[box.leftLat, box.rightLat]).toSQL())
+			console.log('the query tosql is:' ,this.query('whereBetween','lat', [box.leftLat, box.rightLat]).query('whereBetween','lng', [box.topLng, box.bottomLng]).query().toSQL())
+			resultPromise = this
 			.query('whereBetween','lat', [box.leftLat, box.rightLat])
 			.query('whereBetween','lng', [box.topLng, box.bottomLng])
-			.fetchAll().then (locations) ->
-				console.log("the fetched locations within map bounds is ", locations)
-				console.log('the number of locs is ', locations.length)
-				console.log("the first one as json is ",  locations[0])
-				console.log("converted to json", locations.toJSON())
-
-				res.json(locations.toJSON())
+			.fetchAll()
+			return resultPromise
 	})
 	return Location

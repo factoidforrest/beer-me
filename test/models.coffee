@@ -15,22 +15,37 @@ describe 'location', ->
 				title:'bla'
 				type:'bla'
 				description:'bla'
-				lat: 0
-				lng: 0
+				lat: 5
+				lng: 5
 			}).save().then -> 
 				done()
 		
 		it 'should be a valid location', ->
 			Location.where({title:'bla'}).fetch().then (loc) ->
 				loc.should.have.property('attributes')
+				loc.get('id').should.be.a('number')
 
 		it 'should convert to json', ->
 			Location.where({title:'bla'}).fetch().then (loc) ->
-				console.log JSON.stringify(loc)
+				json = JSON.stringify(loc)
+				
 				
 		it 'should convert from collection to json', ->
 			Location.where({title:'bla'}).fetch().then (locs) ->
+				console.log('collection json:')
 				console.log JSON.stringify(locs)
+
+		it 'should find by lat lng', ->
+			box = {
+				leftLat: '4',
+				rightLat: '6',
+				topLng: '4',
+				bottomLng: '6' 
+			}
+
+			Location.findInBox(box).then (locations) ->
+				console.log('found locations: ', locations.last().attributes)
+				locations.size().should.equal(1)
 
 		it 'should destroy', ->
 			Location.where({title:'bla'}).fetchAll().then (locations) ->

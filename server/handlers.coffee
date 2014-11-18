@@ -16,6 +16,7 @@ module.exports =
 		box = req.body.box
 		console.log('the box is ', box)
 		Location = db.models.location
-		knex = db.knex
 
-		Location.findInBox(box)
+		Location.findInBox(box).then (locations) ->
+			console.log('got ', locations.size(), ' locations')
+			res.json(locations.toJSON)
