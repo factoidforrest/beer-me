@@ -49,9 +49,22 @@ define(['backbone', 'leaflet'], function(Backbone, leaflet) {
       console.log('view intialized');
     },
     render: function() {
+      var marker;
       console.log('rendering marker');
-      this.marker = L.marker(this.model.get('coordinates'));
-      return this.model.collection.layer.get('layerGroup').addLayer(this.marker);
+      this.marker = L.marker(this.model.get('coordinates'), {
+        opacity: .1
+      }).on('add', function() {
+        return console.log('add event fired');
+      });
+      marker = this.marker;
+      console.log('the marker is ', this.marker);
+      this.model.collection.layer.get('layerGroup').addLayer(this.marker);
+      return setTimeout((function(_this) {
+        return function() {
+          console.log('setting opacity');
+          return marker.setOpacity(1);
+        };
+      })(this), 3);
     },
     remove: function() {
       console.log('removing marker');

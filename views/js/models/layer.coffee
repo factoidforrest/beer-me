@@ -67,8 +67,29 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 
 		render: ->
 			console.log('rendering marker')
-			@marker = L.marker(this.model.get('coordinates'))
+			@marker = L.marker(
+				this.model.get('coordinates'),
+				{opacity: .1}
+			).on('add', ->
+				console.log('add event fired')
+				#@setOpacity(1)
+				)
+			
+			marker = @marker
+			
+			
+			console.log('the marker is ', @marker)
+			#$(@marker._icon).css('opacity')
 			@model.collection.layer.get('layerGroup').addLayer(@marker)
+			#seems to take a little time for the element to make its way into the dom, at which point the transition will
+			#apply and we can set the opacity.  only a few ms are needed so this seems an ok workaround.  another option would be
+			#to listen to an added event on the layer which presumably fires after the dom is loaded
+			
+			setTimeout( =>
+				console.log('setting opacity')
+				marker.setOpacity(1)
+			, 3)
+			
 
 		remove: ->
 			console.log('removing marker')
