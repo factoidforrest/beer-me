@@ -4,7 +4,9 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 		initialize: () ->
 			console.log('initializing location model: ')
 			console.log( this)
-			locationMarker = new LocationMarker {model: this}
+			@set({'marker': new LocationMarker {model: this}})
+			@on 'remove', ()->
+				console.log('removed model')
 		#promptColor: function() {
 		#  this.set({color: "a thing"});
 		#}
@@ -17,6 +19,7 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 			console.log('initializing collection')
 			console.log(this)
 			return
+
 
 		create: (attributes, options) -> 
 			#pass the collection's layer onto the marker so it knows where to render
@@ -49,22 +52,27 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 		tagName: "???"
 		className: "???"
 		events:
-			###
+			
 			"click .icon": "open"
 			"click .button.edit": "openEditDialog"
 			"click .button.delete": "destroy"
-			###
 			
+
 		initialize: ->
 			@listenTo @model, "add", @render
+			@listenTo @model, 'remove', @remove
 			console.log('view intialized')
-			@render
+			
 			return
 
 		render: ->
 			console.log('rendering marker')
-			marker = L.marker(this.model.get('coordinates'))
-			@model.collection.layer.get('layerGroup').addLayer(marker)
+			@marker = L.marker(this.model.get('coordinates'))
+			@model.collection.layer.get('layerGroup').addLayer(@marker)
+
+		remove: ->
+			console.log('removing marker')
+			@model.collection.layer.get('layerGroup').removeLayer(@marker)
 
 
 	return Layer

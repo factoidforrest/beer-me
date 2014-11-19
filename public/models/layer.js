@@ -2,11 +2,15 @@ define(['backbone', 'leaflet'], function(Backbone, leaflet) {
   var Layer, Location, LocationCollection, LocationMarker;
   Location = Backbone.Model.extend({
     initialize: function() {
-      var locationMarker;
-      console.log('initializing: ');
+      console.log('initializing location model: ');
       console.log(this);
-      return locationMarker = new LocationMarker({
-        model: this
+      this.set({
+        'marker': new LocationMarker({
+          model: this
+        })
+      });
+      return this.on('remove', function() {
+        return console.log('removed model');
       });
     }
   });
@@ -41,14 +45,17 @@ define(['backbone', 'leaflet'], function(Backbone, leaflet) {
     },
     initialize: function() {
       this.listenTo(this.model, "add", this.render);
+      this.listenTo(this.model, 'remove', this.remove);
       console.log('view intialized');
-      this.render;
     },
     render: function() {
-      var marker;
       console.log('rendering marker');
-      marker = L.marker(this.model.get('coordinates'));
-      return this.model.collection.layer.get('layerGroup').addLayer(marker);
+      this.marker = L.marker(this.model.get('coordinates'));
+      return this.model.collection.layer.get('layerGroup').addLayer(this.marker);
+    },
+    remove: function() {
+      console.log('removing marker');
+      return this.model.collection.layer.get('layerGroup').removeLayer(this.marker);
     }
   });
   return Layer;
