@@ -8,8 +8,9 @@ module.exports = (bookshelf) ->
 		tableName: 'locations'
 
 		initialize: () ->
-			this.set('created_at', Date.now())
-			this.set('updated_at', Date.now())
+			#figure out how to set these on creating and updating events
+			#this.set('created_at', knex.raw('now()'))
+			#this.set('updated_at', knex.raw('now()'))
 			console.log('initializing location model with attributes')
 			console.log(this)
 			return
@@ -37,9 +38,10 @@ module.exports = (bookshelf) ->
 
 			#console.log(knex('locations').whereBetween('lat',[box.leftLat, box.rightLat]).toSQL())
 			console.log('the query tosql is:' ,this.query('whereBetween','lat', [box.leftLat, box.rightLat]).query('whereBetween','lng', [box.topLng, box.bottomLng]).query().toSQL())
+			console.log('query ranges are ', [box.bottomLat, box.topLat], [box.leftLng, box.rightLng])
 			resultPromise = this
-			.query('whereBetween','lat', [box.leftLat, box.rightLat])
-			.query('whereBetween','lng', [box.topLng, box.bottomLng])
+			.query('whereBetween','lat', [box.bottomLat, box.topLat])
+			.query('whereBetween','lng', [box.leftLng, box.rightLng])
 			.fetchAll()
 			return resultPromise
 	})

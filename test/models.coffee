@@ -37,14 +37,13 @@ describe 'location', ->
 
 		it 'should find by lat lng', ->
 			box = {
-				leftLat: '4',
-				rightLat: '6',
+				leftLat: '4.1',
+				rightLat: '5.9',
 				topLng: '4',
 				bottomLng: '6' 
 			}
 
 			Location.findInBox(box).then (locations) ->
-				console.log('found locations: ', locations.last().attributes)
 				locations.size().should.equal(1)
 
 		it 'should destroy', ->

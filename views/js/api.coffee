@@ -5,10 +5,10 @@ define [], ()->
 			collection.get('locations').fetch({ 
 				data: {
 					box : { 			
-						leftLat: bounds._southWest.lat
-						rightLat: bounds._northEast.lat
-						topLng: bounds._northEast.lng
-						bottomLng: bounds._southWest.lng
+						topLat: bounds._northEast.lat
+						bottomLat: bounds._southWest.lat
+						rightLng: bounds._northEast.lng
+						leftLng: bounds._southWest.lng
 					}
 				},
 				type: 'POST',

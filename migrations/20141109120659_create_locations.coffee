@@ -7,6 +7,8 @@ exports.up = (knex, Promise) ->
     t.text("description")
     t.float("lat").notNull()
     t.float("lng").notNull()
+    #confirmed this two field index works using pgadmin
+    t.index(['lat', 'lng'])
     t.timestamps()
     return
 
