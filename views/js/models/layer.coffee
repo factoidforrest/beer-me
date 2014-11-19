@@ -2,7 +2,7 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 
 	Location = Backbone.Model.extend({
 		initialize: () ->
-			console.log('initializing: ')
+			console.log('initializing location model: ')
 			console.log( this)
 			locationMarker = new LocationMarker {model: this}
 		#promptColor: function() {
@@ -49,10 +49,12 @@ define ['backbone', 'leaflet'], (Backbone, leaflet) ->
 		tagName: "???"
 		className: "???"
 		events:
+			###
 			"click .icon": "open"
 			"click .button.edit": "openEditDialog"
 			"click .button.delete": "destroy"
-
+			###
+			
 		initialize: ->
 			@listenTo @model, "add", @render
 			console.log('view intialized')

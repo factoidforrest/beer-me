@@ -19,4 +19,5 @@ module.exports =
 
 		Location.findInBox(box).then (locations) ->
 			console.log('got ', locations.size(), ' locations')
-			res.json(locations.toJSON)
+			console.log('converted locations to json:', locations.toJSON())
+			res.json(locations.toJSON())

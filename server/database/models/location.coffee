@@ -11,8 +11,8 @@ module.exports = (bookshelf) ->
 			#figure out how to set these on creating and updating events
 			#this.set('created_at', knex.raw('now()'))
 			#this.set('updated_at', knex.raw('now()'))
-			console.log('initializing location model with attributes')
-			console.log(this)
+			#console.log('initializing location model with attributes')
+			#console.log(this)
 			return
 
 		ratings: () ->
@@ -36,13 +36,12 @@ module.exports = (bookshelf) ->
 			knex = db.knex
 			console.log('firing query: ')
 
-			#console.log(knex('locations').whereBetween('lat',[box.leftLat, box.rightLat]).toSQL())
-			console.log('the query tosql is:' ,this.query('whereBetween','lat', [box.leftLat, box.rightLat]).query('whereBetween','lng', [box.topLng, box.bottomLng]).query().toSQL())
-			console.log('query ranges are ', [box.bottomLat, box.topLat], [box.leftLng, box.rightLng])
+			#note that sql between queries must go from small to big.  I'm guessing that will make problems around the map edges
 			resultPromise = this
 			.query('whereBetween','lat', [box.bottomLat, box.topLat])
 			.query('whereBetween','lng', [box.leftLng, box.rightLng])
 			.fetchAll()
+
 			return resultPromise
 	})
 	return Location
