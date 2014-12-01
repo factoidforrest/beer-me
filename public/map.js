@@ -8,7 +8,7 @@ define(['layer', 'api', 'leaflet', 'leaflet_locate', 'leaflet_geoip'], function(
       var lc, map, self;
       self = this;
       console.log("map initializing");
-      window.map = this.map = map = L.map('map').setView([51.505, -0.09], 11);
+      window.map = this.map = map = L.map('map', mapOptions).setView([51.505, -0.09], 11);
       lc = L.control.locate(locateOptions).addTo(map);
       lc.locate();
       L.tileLayer('http://{s}.tiles.mapbox.com/v3/light24bulbs.k6c8a0kc/{z}/{x}/{y}.png', {
@@ -32,6 +32,10 @@ define(['layer', 'api', 'leaflet', 'leaflet_locate', 'leaflet_geoip'], function(
     return Map;
 
   })();
+  mapOptions = {
+    worldCopyJump: true,
+    minZoom: 3
+  }
   locateOptions = {
     position: "topleft",
     drawCircle: true,

@@ -10,7 +10,6 @@ module.exports =
 		section = "main"
 		res.render('root.jade', {section: section})
 	
-	#move core logic here to another file, perhaps even the location model,and pass it a callback which takes locations as arg
 	locations: (req, res) ->
 
 		box = req.body.box

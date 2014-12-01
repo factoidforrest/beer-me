@@ -28,6 +28,7 @@ describe 'location', ->
 		it 'should convert to json', ->
 			Location.where({title:'bla'}).fetch().then (loc) ->
 				json = JSON.stringify(loc)
+				#test attrs
 				
 				
 		it 'should convert from collection to json', ->
