@@ -12,7 +12,7 @@
     "node-sass": "~0.8.3",
     "twitter-bootstrap-node": "~0.1.2",
     "connect-coffee-script": "~0.2.0",
-    "serve-favicon": "~2.1.5",
+    "serve-favicon": "~2.5.0",
     "bookshelf": "~0.7.9",
     "pg": "~3.6.2",
     "replify": "~1.2.0",
