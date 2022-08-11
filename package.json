@@ -16,7 +16,7 @@
     "bookshelf": "~0.7.9",
     "pg": "~3.6.2",
     "replify": "~1.2.0",
-    "mocha": "~2.0.1",
+    "mocha": "~2.5.3",
     "chai": "~1.9.2",
     "body-parser": "~1.9.2",
     "postgeo": "~0.1.2",
