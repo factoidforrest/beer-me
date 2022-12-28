@@ -12,44 +12,6 @@ My node project starter
 
 
 
-   
-   
-    
-     
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 Install npm and node. 
