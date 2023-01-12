@@ -10,10 +10,6 @@ My node project starter
 ### Development Setup
 
 
-
-
-
-
 Install npm and node. 
 Enter project directory and run 
 
