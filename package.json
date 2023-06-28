@@ -20,7 +20,8 @@
     "chai": "~1.9.2",
     "body-parser": "~1.9.2",
     "postgeo": "~0.1.2",
-    "q": "~1.1.1"
+    "q": "~1.1.1",
+    "@snyk/protect": "latest"
   },
   "devDependencies": {
     "coffee-script": "~1.7.1",
@@ -33,7 +34,9 @@
     "knex": "~0.7.3"
   },
   "scripts": {
-    "postinstall": "knex migrate:latest"
+    "postinstall": "knex migrate:latest",
+    "prepare": "npm run snyk-protect",
+    "snyk-protect": "snyk-protect"
   },
   "repository": {
     "type": "git",
@@ -44,5 +47,6 @@
   "bugs": {
     "url": "https://github.com/light24bulbs/node-template/issues"
   },
-  "homepage": "https://github.com/light24bulbs/node-template"
+  "homepage": "https://github.com/light24bulbs/node-template",
+  "snyk": true
 }
