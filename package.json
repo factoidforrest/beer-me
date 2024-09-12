@@ -7,7 +7,7 @@
   "description": "",
   "main": "server.coffee",
   "dependencies": {
-    "express": "~3.4.8",
+    "express": "~4.20.0",
     "coffee-middleware": "0.3.0",
     "node-sass": "~0.8.3",
     "twitter-bootstrap-node": "~0.1.2",
@@ -18,7 +18,7 @@
     "replify": "~1.2.0",
     "mocha": "~2.0.1",
     "chai": "~1.9.2",
-    "body-parser": "~1.9.2",
+    "body-parser": "~1.20.3",
     "postgeo": "~0.1.2",
     "q": "~1.1.1"
   },
